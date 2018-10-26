@@ -47,7 +47,7 @@ RUN mkdir -p /home/app/netflow
 COPY --from=unms-netflow /home/app /home/app/netflow
 
 RUN devDeps="vips-dev fftw-dev make python g++" \
-  && apk add --no-cache ${devDeps} \
+  && apk add --no-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing/ --repository https://dl-3.alpinelinux.org/alpine/edge/main ${devDeps} \
   && cd /home/app/netflow \
   && JOBS=$(nproc) npm install \
   && apk del ${devDeps}
