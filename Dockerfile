@@ -1,6 +1,6 @@
 # Multi-stage build - See https://docs.docker.com/engine/userguide/eng-image/multistage-build
-FROM ubnt/unms:0.13.0 as unms
-FROM ubnt/unms-netflow:0.13.0 as unms-netflow
+FROM ubnt/unms:0.13.1-connection.2 as unms
+FROM ubnt/unms-netflow:0.13.1-connection.2 as unms-netflow
 FROM oznu/s6-node:8.12.0-amd64
 
 # base deps redis, rabbitmq
@@ -112,7 +112,7 @@ RUN set -x && devDeps="wget pcre-dev zlib-dev build-base libffi-dev python-dev b
     && echo "unms ALL=(ALL) NOPASSWD: /usr/sbin/nginx -s *" >> /etc/sudoers \
     && echo "unms ALL=(ALL) NOPASSWD:SETENV: /copy-user-certs.sh reload" >> /etc/sudoers
 
-ADD https://github.com/Ubiquiti-App/UNMS/archive/v0.13.0.tar.gz /tmp/unms.tar.gz
+ADD https://github.com/Ubiquiti-App/UNMS/archive/v0.13.1-connection.2.tar.gz /tmp/unms.tar.gz
 
 RUN cd /tmp \
     && tar -xzf unms.tar.gz \
