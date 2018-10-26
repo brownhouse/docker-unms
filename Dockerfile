@@ -26,7 +26,7 @@ WORKDIR /home/app/unms
 COPY --from=unms /home/app/unms /home/app/unms
 
 RUN devDeps="vips-dev fftw-dev make python g++" \
-    && apk add --no-cache ${devDeps} su-exec gzip bash vim dumb-init openssl vips libcap \
+    && apk add --no-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing/ --repository https://dl-3.alpinelinux.org/alpine/edge/main ${devDeps}  su-exec gzip bash vim dumb-init openssl vips libcap \
     && rm -rf node_modules \
     && JOBS=$(nproc) npm install \
     && apk del ${devDeps} \
